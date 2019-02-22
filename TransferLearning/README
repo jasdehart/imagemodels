@@ -1,0 +1,21 @@
+to run predictor: python3 runmodel.py -d ./testing -m ./testmodel.pt
+You can put full paths or abbreviated if deriving from the same directory.
+
+to run classifiers: python3 modelfilename.py
+
+Working models:
+* testmodel.pt
+Feature Extraction. Ran on 24 Epochs
+created model with transferconvet.py
+* testmodel_finetune.pt
+FineTune. Ran on 24 Epochs
+created model with translearn_finetune.py
+* testmodel_other.pt
+FineTune. Ran on 14 Epochs
+created model with finetuning_torchvision_models_tutorial.py
+
+Images: 
+Images for running models are in ./baby_keys_filtered
+Images for running predictions are in ./testing
+
+Note: png images fail due to RGBA warnings
