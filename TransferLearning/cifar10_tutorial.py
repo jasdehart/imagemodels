@@ -203,7 +203,7 @@ print('GroundTruth: ', ' '.join('%5s' % classes[labels[j]] for j in range(4)))
 
 ########################################################################
 # Okay, now let us see what the neural network thinks these examples above are:
-
+##lisa
 outputs = net(images)
 
 ########################################################################
@@ -333,4 +333,3 @@ print(device)
 # .. _More tutorials: https://github.com/pytorch/tutorials
 # .. _Discuss PyTorch on the Forums: https://discuss.pytorch.org/
 # .. _Chat with other users on Slack: https://pytorch.slack.com/messages/beginner/
-

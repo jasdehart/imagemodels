@@ -1,8 +1,8 @@
 #!usr/bin/python3
-'''
-to run: python3 remaketwo.py -d ./testing -m ./TransferLearning/testmodel.pt
-You can put full paths or abbreviated if deriving from the same directory.
-'''
+
+    #to run: python3 remaketwo.py -d ./testing -m ./TransferLearning/testmodel.pt
+    #You can put full paths or abbreviated if deriving from the same directory.
+from __future__ import print_function, division
 
 import argparse
 import copy
@@ -16,21 +16,20 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 
-from __future__ import print_function, division
 from torch.optim import lr_scheduler
 from torchvision.transforms import ToTensor
 from torchvision import datasets, models, transforms
 from PIL import Image
 
-    '''
-	def main() calls getfiles() function and passes in directory from command line which 
-	is set in if, name, main section
-    Since paths is what we need to send to running_model_prediction(), I set 
-    the getfiles() = to paths because it returns the information we need. 
-    paths can then be sent to the next function. In running_model_predictions(),
-    we send model because predict_images() needs that information but we 
-    didn't call it in main, so the needed information is forwarded.
-    '''
+'''
+def main() calls getfiles() function and passes in directory from command line which
+is set in if, name, main section
+Since paths is what we need to send to running_model_prediction(), I set
+the getfiles() = to paths because it returns the information we need.
+paths can then be sent to the next function. In running_model_predictions(),
+we send model because predict_images() needs that information but we
+didn't call it in main, so the needed information is forwarded.
+'''
 
 def main(directory, model):
     paths = getfiles(directory)
@@ -46,11 +45,13 @@ def getfiles(directory):
             print(filename)
             fileList.append(str(filename))
         if filename.endswith(".png"):
-            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files")
+            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
+        if filename.endswith(".jpeg"):
+            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
     for filename in list(fileList):
         fn = directory + '/' + filename
         fullPathList.append(str(fn))
-	
+
     return fullPathList
 
 
@@ -89,10 +90,10 @@ def running_model_predictions(path, model):
             index = 'prediction: license'
         if (index == 4):
             index = 'prediction: passport'
-        
+
         print (index)
 
-    
+
 
 if __name__ == "__main__":
     #getting our information from command line, ALL are REQUIRED
@@ -111,7 +112,7 @@ if __name__ == "__main__":
         fileList = list() #store fileNames
         fullPathList = list() #store full filename paths
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
+
     #if the argument for model is input do this...
     if args.model:
         model = args.model
