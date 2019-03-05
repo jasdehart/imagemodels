@@ -186,7 +186,7 @@ for param in model_conv.parameters():
 
 # Parameters of newly constructed modules have requires_grad=True by default
 num_ftrs = model_conv.fc.in_features
-model_conv.fc = nn.Linear(num_ftrs, 5)
+model_conv.fc = nn.Linear(num_ftrs, 12)
 
 model_conv = model_conv.to(device)
 

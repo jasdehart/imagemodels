@@ -24,18 +24,18 @@ from torchvision import datasets, models, transforms
 from PIL import Image
 
 '''
-	def main() calls getfiles() function and passes in directory from command line which 
+	def main() calls getfiles() function and passes in directory from command line which
 	is set in if, name, main section
-    Since paths is what we need to send to running_model_prediction(), I set 
-    the getfiles() = to paths because it returns the information we need. 
+    Since paths is what we need to send to running_model_prediction(), I set
+    the getfiles() = to paths because it returns the information we need.
     paths can then be sent to the next function. In running_model_predictions(),
-    we send model because predict_images() needs that information but we 
+    we send model because predict_images() needs that information but we
     didn't call it in main, so the needed information is forwarded.
 '''
 
 
 class MyModel(nn.Module):
-    
+
     def __init__(self):
         super(MyModel, self).__init__()
         self.layer1 = nn.Sequential(
@@ -48,7 +48,7 @@ class MyModel(nn.Module):
             nn.AdaptiveAvgPool2d(1))
         self.drop_out = nn.Dropout()
         self.fc1 = nn.Linear(1 * 1 * 64, 100)
-        self.fc2 = nn.Linear(100, 10)
+        self.fc2 = nn.Linear(100,64)
 
     def forward(self, x):
         out = self.layer1(x)
@@ -117,10 +117,10 @@ def running_model_predictions(path, model):
             index = 'prediction: license'
         if (index == 4):
             index = 'prediction: passport'
-        
+
         print (index)
 
-        
+
 
 if __name__ == "__main__":
     #getting our information from command line, ALL are REQUIRED
@@ -139,11 +139,11 @@ if __name__ == "__main__":
         fileList = list() #store fileNames
         fullPathList = list() #store full filename paths
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
+
     #if the argument for model is input do this...
     if args.model:
         # original saved file with DataParallel
-        checkpoint = torch.load('/home/leanna/Documents/Research/imagemodels/TransferLearning/conv_net_model.ckpt')
+        checkpoint = torch.load('/Users/lisaegede/Documents/GitHub/imagemodels/TransferLearning/conv_net_model.ckpt')
         """
         import re
         pattern = re.compile(r'(?:layer1.0.weight|layer1.0.bias|layer2.0.weight|layer2.0.bias|fc1.weight|fc1.bias|fc2.weight|fc2.bias)\.?')
@@ -158,16 +158,16 @@ if __name__ == "__main__":
         """
         model.load_state_dict(checkpoint)
         model.eval()
-        
-        
-        
+
+
+
         #print(model)
         #checkpoint = torch.load('/home/leanna/Documents/Research/imagemodels/TransferLearning/conv_net_model.ckpt')
         #from pdb import set_trace; set_trace()
         #model.load_state_dict(checkpoint)
-        
 
-       
+
+
         #model.eval() #needed for normalization
         #model.load_state_dict(torch.load(model))
         #checkpoint.eval()
