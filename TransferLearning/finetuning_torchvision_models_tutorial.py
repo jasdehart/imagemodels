@@ -13,7 +13,11 @@ import os
 import copy
 print("PyTorch Version: ",torch.__version__)
 print("Torchvision Version: ",torchvision.__version__)
+import PIL
+from PIL import Image
 
+
+Image.MAX_IMAGE_PIXELS = None
 
 
 data_dir = "./baby_keys_filtered"
@@ -22,7 +26,7 @@ data_dir = "./baby_keys_filtered"
 model_name = "squeezenet"
 
 # Number of classes in the dataset
-num_classes = 5
+num_classes = 12
 
 # Batch size for training (change depending on how much memory you have)
 batch_size = 8
