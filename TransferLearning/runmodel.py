@@ -35,28 +35,38 @@ def main(directory, model):
     paths = getfiles(directory)
     running_model_predictions(paths, model)
 
-
 def getfiles(directory):
+    fileList = []
+    
     for filename in os.listdir(directory):
-        if filename.endswith(".jpg"):
-            print(filename)
-            fileList.append(str(filename))
-        if filename.endswith(".gif"):
-            print(filename)
-            fileList.append(str(filename))
-        if filename.endswith(".png"):
-            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
-        if filename.endswith(".jpeg"):
-            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
+        fnc = directory + "/" + filename
+        print("PRINTING" + fnc)
+        if os.path.isdir(fnc):
+            '''print("is in directory path for " + fnc)'''
+            for filename in os.listdir(fnc):
+                fileDir = fnc + "/" + filename
+                if os.path.isdir(fileDir):
+                    for filename in os.listdir(fileDir):
+                        if filename.endswith(".jpg"):
+                            print("printing filename ending with .jpg" + filename)
+                            fileList.append(str(filename))
+                        if filename.endswith(".gif"):
+                            print("printing filename ending with .gif" + filename)
+                            fileList.append(str(filename))
+                        if filename.endswith(".png"):
+                            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
+                        if filename.endswith(".jpeg"):
+                            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
     for filename in list(fileList):
         fn = directory + '/' + filename
         fullPathList.append(str(fn))
-
     return fullPathList
 
 
 #prediction function
 def predict_image(image, model):
+    print("hello predict image")
+
         #boundaries for transforming the image
     test_transforms = transforms.Compose([
             transforms.RandomResizedCrop(224),
@@ -73,8 +83,10 @@ def predict_image(image, model):
 
 #running predictions with files
 def running_model_predictions(path, model):
+    print("inside running model")
     for filename in list(path):
         X = Image.open(filename)
+        print(X)
         print('***********************************************************')
         print("Current file: " + filename)
         index = predict_image(X, model)
