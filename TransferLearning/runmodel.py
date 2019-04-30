@@ -41,10 +41,32 @@ def main(directory, model):
     running_model_predictions(paths, model)
 
 def getfiles(directory):
-    '''fileList = []'''
+    #fileList = []
     fullPathList = []
-    
     for filename in os.listdir(directory):
+        fnc = directory + "/" + filename
+        if(filename == ".DS_Store"):
+            print("ERROR: DS_Store found: DO NOT APPEND or IS PNG")
+        elif filename.endswith(".gif"):
+            sys.stderr.write("ERROR: Classifier only takes .jpg files\n")
+                #fileList.append(str(filename))
+        elif filename.endswith(".png"):
+            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
+        elif filename.endswith(".jpeg"):
+            sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
+        else:
+        #print("PRINTING" + fnc)
+            fullPathList.append(fnc)
+        if os.path.isdir(fnc):
+            print("is in directory path for " + fnc)
+            for filename in os.listdir(fnc):
+                fileDir = fnc + "/" + filename
+                print("is inside in directory path for " + fileDir)
+                print(filename)
+        pprint(fullPathList)
+    return fullPathList
+
+'''for filename in os.listdir(directory):
         fnc = directory + "/" + filename
         print("PRINTING" + fnc)
         if os.path.isdir(fnc):
@@ -67,10 +89,13 @@ def getfiles(directory):
                             sys.stderr.write("ERROR: Classifier only takes .jpg and .gif files\n")
                     for filename in list(fileList):
                         fn = fileDir + '/' + filename
-                        '''fn = directory + '/' + filename'''
+                        #fn = directory + '/' + filename
                         fullPathList.append(str(fn))
         pprint(fullPathList)
     return fullPathList
+'''
+
+#eneded in food-cuisine directory
 
 #prediction function
 def predict_image(image, model):
